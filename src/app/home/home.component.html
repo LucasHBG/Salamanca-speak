@@ -1,0 +1,43 @@
+<div class="container h-full w-full mx-auto ">
+  <div class="contents text-center">
+    <div class="max-w-5xl">
+      <h1 class="text-5xl md:text-3xl sm:text-sm font-bold">Salamander<span class="text-indigo-600">speak</span></h1>
+
+      <br>
+      <!-- outsite area of container -->
+      <div class="shadow sm:rounded-md sm:overflow-hidden">
+        <!-- background container color -->
+        <div class="px-4 py-5 bg-slate-700 space-y-6 sm:p-6">
+
+          <!-- Textarea container -->
+          <div>
+            <form [formGroup]="formGroup" novalidate>
+
+              <label for="entryText" class="block text-sm font-medium text-white"> Texto para traduzir</label>
+              <div class="mt-1">
+                <textarea id="entryText" rows="3" formControlName="entryText" class="textarea textarea-primary"
+                  placeholder="you@example.com"></textarea>
+              </div>
+              <p class="mt-2 text-sm text-white">Resultado: </p>
+
+              <div class="mockup-code">
+                <label for="result" class="text-warning">Resultado: </label>
+                <pre *ngIf="!getEntryText['entryText']?.value" id="result"
+                  data-prefix="$"><code>Esperando texto...</code></pre>
+              </div>
+              <div *ngIf="getEntryText['entryText'].touched && getEntryText['entryText'].invalid" class="alert alert-danger">
+                <b>Caracteres especiais e números são inválidos.</b>
+                <!-- <div *ngIf="getEntryText['entryText'].errors['required']">Value is required</div> -->
+                <!-- <div *ngIf="getEntryText['entryText'].errors['pattern']?">Only URL is allowed</div> -->
+              </div>
+
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
