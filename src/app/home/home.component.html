@@ -1,11 +1,12 @@
-<div class="container h-full w-full mx-auto ">
-  <div class="contents text-center">
-    <div class="max-w-5xl">
-      <h1 class="text-5xl md:text-3xl sm:text-sm font-bold">Salamander<span class="text-indigo-600">speak</span></h1>
+<div class="flex w-auto lg:px-48 px-8 pt-16">
+  <div class="flex-1">
+    <div class="contents text-center">
+
+      <p class="sm:text-5xl text-4xl font-bold flex-none">Salamanca<span class="text-indigo-600">speak</span></p>
 
       <br>
       <!-- outsite area of container -->
-      <div class="shadow sm:rounded-md sm:overflow-hidden">
+      <div class="shadow rounded-md overflow-hidden">
         <!-- background container color -->
         <div class="px-4 py-5 bg-slate-700 space-y-6 sm:p-6">
 
@@ -13,22 +14,30 @@
           <div>
             <form [formGroup]="formGroup" novalidate>
 
-              <label for="entryText" class="block text-sm font-medium text-white"> Texto para traduzir</label>
+              <label for="entryText" class="block text-lg font-medium text-white"> Texto para traduzir</label>
               <div class="mt-1">
-                <textarea id="entryText" rows="3" formControlName="entryText" class="textarea textarea-primary"
-                  placeholder="you@example.com"></textarea>
+                <textarea id="entryText" rows="3" formControlName="entryText"
+                  class="textarea textarea-primary flex-1 w-full" placeholder="DIGITE AQUI SUA FRASE"></textarea>
               </div>
-              <p class="mt-2 text-sm text-white">Resultado: </p>
+              <p class="mt-2 text-lg text-white">Resultado: </p>
 
               <div class="mockup-code">
                 <label for="result" class="text-warning">Resultado: </label>
                 <pre *ngIf="!getEntryText['entryText']?.value" id="result"
                   data-prefix="$"><code>Esperando texto...</code></pre>
-              </div>
-              <div *ngIf="getEntryText['entryText'].touched && getEntryText['entryText'].invalid" class="alert alert-danger">
-                <b>Caracteres especiais e números são inválidos.</b>
-                <!-- <div *ngIf="getEntryText['entryText'].errors['required']">Value is required</div> -->
-                <!-- <div *ngIf="getEntryText['entryText'].errors['pattern']?">Only URL is allowed</div> -->
+
+                <div *ngIf="getEntryText['entryText']?.value">
+                  <div *ngFor="let outputText of outputTexts">
+                    <pre id="outputText" data-prefix="$"><code>{{ outputText }}</code></pre>
+                  </div>
+                </div>
+
+                <!-- alert box -->
+                <div *ngIf="getEntryText['entryText'].touched && getEntryText['entryText'].invalid"
+                  class="alert alert-danger">
+                  <b>Caracteres especiais e números são inválidos.</b>
+                </div>
+
               </div>
 
             </form>
