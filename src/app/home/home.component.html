@@ -1,4 +1,4 @@
-<div class="flex w-auto lg:px-48 px-8 pt-8">
+<div class="flex w-auto lg:px-48 px-4 pt-8">
   <div class="flex-1">
     <div class="contents">
 
@@ -32,10 +32,17 @@
                   <pre *ngIf="!getEntryText['entryText']?.value" id="result"
                     data-prefix="$"><code>Esperando texto...</code></pre>
 
-                  <div *ngIf="getEntryText['entryText']?.value">
-                    <div *ngFor="let outputText of outputTexts">
-                      <pre id="outputText" data-prefix="$"><code>{{ outputText }}</code></pre>
+                  <div class="sm:block hidden">
+                    <div *ngIf="getEntryText['entryText']?.value">
+                      <div *ngFor="let outputText of outputTexts">
+                        <pre id="outputText" data-prefix="$"><code>{{ outputText }}</code></pre>
+                      </div>
                     </div>
+                  </div>
+
+                  <div *ngIf="getEntryText['entryText']?.value" class="sm:hidden visible">
+                    <pre data-prefix="!" class="text text-warning"><code>Resolução baixa!</code></pre>
+                    <pre data-prefix="!" class="text text-warning"><code>Clique no botão para copiar</code></pre>
                   </div>
 
                   <!-- alert box -->
