@@ -1,5 +1,5 @@
 import { UpperCasePipe } from "@angular/common";
-import { Component, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
@@ -53,15 +53,8 @@ export class HomeComponent implements OnInit {
     this.formGroup
       .get("entryText")
       ?.valueChanges.subscribe((currentValue: string) => {
-        // console.log("entryText value changed");
-
         setTimeout(() => {
           if (currentValue.length > 0) {
-            // Iterate through currentValue string
-
-            // console.log("Tamanho currentVal: " + currentValue.length);
-            // console.log("Tamanho outputTexts [INICIO]: " + this.outputTexts.length);
-
             //Reset array if the user erased some value
             if (this.outputTexts.length > currentValue.length) {
               this.outputTexts.pop();
@@ -86,66 +79,31 @@ export class HomeComponent implements OnInit {
                     break;
                   }
                 }
-                // console.log(phrase);
               }
-
-              // console.log("Tamanho outputTexts [FIM]: " + this.outputTexts.length);
-
             }
           } else {
-            //remove any value left on the array 
+            //remove any value left on the array
             if (this.outputTexts.length > currentValue.length) {
               this.outputTexts.pop();
             }
           }
-
-          // if (currentValue.length > 0) {
-          //   // Iterate through currentValue string
-          //   for (let i = 0; i < currentValue.length; i++) {
-          //     console.log("Tamanho currentVal: " + currentValue.length);
-          //     console.log("INDEX 0 currentVal: " + currentValue.charAt(0));
-          //     if(currentValue.length == 2)
-          //       console.log("INDEX 1 currentVal: " + currentValue.charAt(1));
-
-          //     //Verifies if value is part of alphabet
-          //     currentValue = this.uppercasePipe.transform(currentValue);
-          //     if (
-          //       currentValue.charAt(i) >= "A" &&
-          //       currentValue.charAt(i) <= "Z"
-          //     ) {
-          //       let phrase: string[] = [];
-
-          //       //Search for letter at the alphabet
-          //       for (let j = 0; j < this.alphabet.length; j++) {
-          //         phrase = phrase.concat(this.alphabet[i] + " ");
-          //         if (
-          //           currentValue.charAt(currentValue.length - 1) ===
-          //           this.alphabet[j]
-          //         ) {
-          //           phrase = phrase.concat("*DING*");
-          //           this.outputTexts.push(phrase.join(" "));
-          //           break;
-          //         }
-
-          //       }
-          //       console.log(phrase);
-
-          //       //Reset array if the user erased some value
-          //       if (this.outputTexts.length < currentValue.length) {
-          //         this.outputTexts.splice(0);
-          //       }
-          //     }
-          //   }
-          // }
         }, 700);
-
-        // setTimeout(() => {
-        //   console.log(this.formGroup.get("entryText")?.value);
-        // });
       });
   }
 
   get getEntryText() {
     return this.formGroup.controls;
+  }
+
+  get getOutputTextClipboard(): string {
+    let clipboardOutput: string = "";
+    
+    if (this.outputTexts.length > 0) {
+      for (let i = 0; i < this.outputTexts.length; i++) {
+        clipboardOutput = clipboardOutput.concat(this.outputTexts[i] + "\n");
+      }
+    }
+    
+    return clipboardOutput;
   }
 }

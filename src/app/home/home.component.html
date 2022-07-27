@@ -1,14 +1,15 @@
-<div class="flex w-auto lg:px-48 px-8 pt-16">
+<div class="flex w-auto lg:px-48 px-8 pt-8">
   <div class="flex-1">
-    <div class="contents text-center">
+    <div class="contents">
 
-      <p class="sm:text-5xl text-4xl font-bold flex-none">Salamanca<span class="text-indigo-600">speak</span></p>
+      <p class="sm:text-5xl text-4xl font-bold flex-none text-center">Salamanca<span
+          class="text-indigo-600">speak</span></p>
 
       <br>
       <!-- outsite area of container -->
       <div class="shadow rounded-md overflow-hidden">
         <!-- background container color -->
-        <div class="px-4 py-5 bg-slate-700 space-y-6 sm:p-6">
+        <div class="px-4 py-4 bg-slate-700 space-y-6 sm:p-6">
 
           <!-- Textarea container -->
           <div>
@@ -17,38 +18,49 @@
               <label for="entryText" class="block text-lg font-medium text-white"> Texto para traduzir</label>
               <div class="mt-1">
                 <textarea id="entryText" rows="3" formControlName="entryText"
-                  class="textarea textarea-primary flex-1 w-full" placeholder="DIGITE AQUI SUA FRASE"></textarea>
+                  class="textarea textarea-secondary flex-1 w-full capitalize"
+                  placeholder="DIGITE AQUI SUA FRASE"></textarea>
               </div>
 
-              <div class="mockup-code">
-                <label for="result" class="text-warning">Resultado: </label>
-                <pre *ngIf="!getEntryText['entryText']?.value" id="result"
-                  data-prefix="$"><code>Esperando texto...</code></pre>
+              <div class="pt-6 pb-6 flex justify-center items-center">
+                <img width="300" src="https://c.tenor.com/Bjn1wAAD6WQAAAAC/ding-bell.gif"> 
+              </div>
 
-                <div *ngIf="getEntryText['entryText']?.value">
-                  <div *ngFor="let outputText of outputTexts">
-                    <pre id="outputText" data-prefix="$"><code>{{ outputText }}</code></pre>
+              <div>
+                <div class="mockup-code">
+                  <pre for="result" data-prefix=">" class="bg-info text-info-content"><code>Resultado:</code></pre>
+                  <pre *ngIf="!getEntryText['entryText']?.value" id="result"
+                    data-prefix="$"><code>Esperando texto...</code></pre>
+
+                  <div *ngIf="getEntryText['entryText']?.value">
+                    <div *ngFor="let outputText of outputTexts">
+                      <pre id="outputText" data-prefix="$"><code>{{ outputText }}</code></pre>
+                    </div>
                   </div>
-                </div>
 
-                <!-- alert box -->
-                <div *ngIf="getEntryText['entryText'].touched && getEntryText['entryText'].invalid"
-                  class="alert shadow">
-                  <div>
+                  <!-- alert box -->
+                  <div *ngIf="getEntryText['entryText'].touched && getEntryText['entryText'].invalid"
+                    class="alert shadow">
+                    <div>
 
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                      class="stroke-info flex-shrink-0 w-6 h-6">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    <span>Caracteres especiais e números são inválidos.</span>
-                  
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        class="stroke-info flex-shrink-0 w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                      <span>Caracteres especiais e números são inválidos.</span>
+
+                    </div>
                   </div>
-                </div>
 
+                </div>
               </div>
 
             </form>
+          </div>
+
+          <div class="text-center">
+            <button [cdkCopyToClipboard]="getOutputTextClipboard" class="btn btn-secondary sm:btn-md">COPIAR</button>
           </div>
 
         </div>
