@@ -59,8 +59,11 @@ export class HomeComponent implements OnInit {
             if (this.outputTexts.length > currentValue.length) {
               this.outputTexts.pop();
             } else {
-              //Verifies if value is part of alphabet
+              //Transform text from input to UpperCase
               currentValue = this.uppercasePipe.transform(currentValue);
+              //Verifies if their is an space between a phrase
+              if(currentValue.charAt(currentValue.length - 1) == " ") this.outputTexts.push("--");
+              //Verifies if value is part of alphabet
               if (
                 currentValue.charAt(currentValue.length - 1) >= "A" &&
                 currentValue.charAt(currentValue.length - 1) <= "Z"
@@ -87,7 +90,7 @@ export class HomeComponent implements OnInit {
               this.outputTexts.pop();
             }
           }
-        }, 700);
+        }, 300);
       });
   }
 
